@@ -1,0 +1,2000 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!--
+
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" []>
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+-->
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [ 
+<!-- One method to get references from the online citation libraries. 
+     There has to be one entity for each item to be referenced.  
+     An alternate method (rfc include) is described in the references.
+
+-->
+
+<!ENTITY RFC6830 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6830.xml">
+<!ENTITY RFC6831 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6831.xml">
+<!ENTITY RFC6832 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6832.xml">
+<!ENTITY RFC6833 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6833.xml">
+<!ENTITY RFC6836 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6836.xml">
+<!ENTITY RFC7215 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7215.xml">
+<!ENTITY RFC8061 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8061.xml">
+<!ENTITY RFC8111 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8111.xml">
+<!ENTITY I-D.draft-ietf-6man-segment-routing-header SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-6man-segment-routing-header-08.xml">
+<!ENTITY I-D.draft-farinacci-lisp-mobile-network SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-farinacci-lisp-mobile-network-02.xml">
+
+<!-- *This xml doesn't work*
+<!ENTITY I-D.draft-bogineni-dmm-optimized-mobile-user-plane SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-bogineni-dmm-optimized-mobile-user-plane-00.xml">
+-->
+
+<!ENTITY I-D.draft-ietf-lisp-eid-mobility SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-ietf-lisp-eid-mobility-00.xml">
+<!ENTITY I-D.draft-herbert-intarea-ila SYSTEM "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.draft-herbert-intarea-ila-00.xml">
+
+
+]> 
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?> 
+<!-- used by XSLT processors --> 
+<!-- For a complete list and description of processing instructions (PIs),  
+      please see http://xml.resource.org/authoring/README.html. --> 
+<!-- Below are generally applicable Processing Instructions (PIs) that most I-Ds might want to use. 
+     (Here they are set differently than their defaults in xml2rfc v1.32) --> 
+<?rfc strict="yes" ?> 
+<!-- give errors regarding ID-nits and DTD validation --> 
+<!-- control the table of contents (ToC) --> 
+<?rfc toc="yes"?> 
+<!-- generate a ToC --> 
+<?rfc tocdepth="4"?> 
+<!-- the number of levels of subsections in ToC. default: 3 --> 
+<!-- control references --> 
+<?rfc symrefs="yes"?> 
+<!-- use symbolic references tags, i.e, [RFC2119] instead of [1] --> 
+<?rfc sortrefs="yes" ?> 
+<!-- sort the reference entries alphabetically --> 
+<!-- control vertical white space  
+     (using these PIs as follows is recommended by the RFC Editor) --> 
+<?rfc compact="yes" ?> 
+<!-- do not start each main section on a new page --> 
+<?rfc subcompact="no" ?> 
+<!-- keep one blank line between list items --> 
+<!-- end of list of popular I-D processing instructions --> 
+
+
+<rfc category="std" docName="draft-homma-dmm-5gs-id-loc-coexistence-01">
+  <!-- ***** FRONT MATTER ***** --> 
+
+
+
+
+  <front>
+    <title abbrev="draft-homma-dmm-5gs-id-loc-coexicetence">
+    Co-existence of 3GPP 5GS and Identifier Locator Separation Architecture
+    </title>
+
+    <author fullname="Shunsuke Homma" initials="S." surname="Homma">
+      <organization abbrev="NTT">NTT, Corp.</organization>
+
+      <address>
+        <postal>
+          <street>3-9-11, Midori-cho</street>
+
+          <city>Musashino-shi</city>
+
+          <region>Tokyo</region>
+
+          <code>180-8585</code>
+
+          <country>Japan</country>
+        </postal>
+        <email>homma.shunsuke@lab.ntt.co.jp</email>
+      </address>
+    </author>
+    
+    <author fullname="Kenta Kawakami" initials="K." surname="Kawakami">
+      <organization abbrev="NTT">NTT, Corp.</organization>
+
+      <address>
+        <postal>
+          <street>3-9-11, Midori-cho</street>
+
+          <city>Musashino-shi</city>
+
+          <region>Tokyo</region>
+
+          <code>180-8585</code>
+
+          <country>Japan</country>
+        </postal>
+        <email>kawakami.kenta@lab.ntt.co.jp</email>
+      </address>
+    </author>
+    
+    
+    <author fullname="Arashmid Akhavain" initials="A." surname="Akhavain">
+      <organization>Huawei Canada Research Centre</organization>
+      <address>
+        <postal>
+        <street/>
+        <city/>
+        <region/>
+        <country>Canada</country>
+        </postal>
+        <email>arashmid.akhavain@huawei.com</email>
+      </address>
+    </author>
+    
+    <date day="15" month="May" year="2018"/>
+
+    <area>Internet Area</area>
+
+    <workgroup>dmm</workgroup>
+    
+    <keyword>Internet-Draft</keyword>
+
+    <abstract>
+      <t>
+      This document describes an approach to introduce Identifier Locator Separation architecture into 3GPP 5GS 
+      with low-impact on its specification, and shows the features and considerations of this approach.
+      </t>
+
+
+<!--      
+      <t>
+      This approach described in this document is protocol agnostic. That is it can be realized either by
+      employing different Identifier Locator Separation protocols such as LISP, ILA, ILNP, etc, and data plane 
+      protocols such as SRv6. It is also possible realized by using other non-GTP-U data plane alternatives 
+      which are beyond the scope of this document.
+      </t>
+-->
+      
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>
+      Identifier Locator Separation (ID-LOC) architecture aims to simplify management of network, devices, and sessions by 
+      employing two namespaces: Identifier for device's identity, and Locator for its location in the network.
+      </t>
+      
+      <t>
+      ID-LOC architecture can be implemented by a dedicated protocol such as LISP, ILA, ILNP, etc. The control plane of such
+      ID-LOC protocols can be combined with one of different encapsulation techniques such as GTP-U, SRv6, MPLS, etc. at data
+      plane to provide a customized solution. Furthermore, regarding control plane of ID-LOC, it can optionally even take 
+      advantage of enhanced PUB/SUB capable distributed databases to circulate ID-LOC mapping relationships in the network.
+      </t>
+      
+      <t>
+      ID-LOC protocols are also expected to be used for optimizing 
+      user-plane of mobile network <xref target="I-D.bogineni-dmm-optimized-mobile-user-plane"/>. Different alternatives to introduce 
+      ID-LOC architecture into 3GPP 5GS(5th Generation System),  are under consideration in related IETF WG such as DMM WG. 
+      </t>
+      
+      <t>
+      Introducing ID-LOC architecture into mobile network can involve modifications to 5GS architecture and specifications that might span over several 5GS releases. 
+      </t>
+      
+      <t>
+      Therefore, an approach that enables the introduction of ID-LOC architecture into 5GS without change of its specifications 
+      and supports migration path toward a native ID-LOC native network can be useful to operators. 
+      Here, ID-LOC native network refers to a network that employs the ID-LOC architecture as only mechanism for packet forwarding.
+      </t>
+      
+      <t>
+      The document aims to describe one such approach and clarify different features, and benefits.
+      </t>
+    </section>
+
+
+    <section title="Definition of Terms">
+      <t>
+      This section describes general terms of ID-LOC architecture.
+      This document also refers definitions of 3GPP 5GS <xref target="TS.23.501-3GPP"/>,
+      and some of such terms which are used in this document are listed in this section.
+      </t>
+      
+      <t>
+      The detailed specifications of LISP are described in <xref target="RFC6830"/>,
+      <xref target="RFC6831"/>, <xref target="RFC6832"/>, <xref target="RFC6833"/>, <xref target="RFC6836"/>, <xref target="RFC7215"/>,
+      <xref target="RFC8061"/>, and <xref target="RFC8111"/>. Moreover, definitions and specifications of another approach to introduce 
+      LISP into 3GPP 5GS is described in <xref target="I-D.farinacci-lisp-mobile-network"/>.
+      </t>
+      
+      <t>
+      The detailed specification of ILA are described in <xref target="I-D.herbert-intarea-ila"/>.
+      </t>
+      
+      <t>
+      The detailed specification of SRv6 are described in <xref target="I-D.ietf-6man-segment-routing-header"/>.
+      </t>
+      
+      
+        <section title="Terms of ID-LOC Protocols">
+          <t>
+          <list style="hanging">
+<!--
+          <t hangText="Ingress/Egress Tunnel Router (xTR):">
+          An xTR is a LISP node that has both Ingress Tunnel Router (ITR) and Egress Tunnel Router (ETR) functionalities. 
+          An ITR is a router which forwards packets to the ETR, which is assigned the appropriate RLOC, with some encapsulation (such as LISP header)
+          depending on the result of EID-to-RLOC mapping. An ETR is a router and it has an RLOC. An ETR strips the encapsulation attached by an ITR 
+          and forwards packets depending on their EIDs. An xTR has interface to EID-to-RLOC mapping system.
+          </t>
+      
+          <t hangText="Endpoint Identifier (EID):">
+          An EID is an identifier of end point such as UE or VM instance. An EID is a 32-bit (for IPv4) or 128-bit (for IPv6) value used in the source
+          and destination IP address fields of an IP packet sent from an UE or a VM instance.
+          </t>
+          
+          <t hangText="Routing Locator (RLOC):">
+          An RLOC is an IPv4 or IPv6 address of an xTR (ETR).
+          </t>
+          
+          <t hangText="Mapping System:">
+          A Mapping System is a system which stores EID-to-RLOC mapping database. This system uses Map-Register, Map-Request, Map-Reply, and Map-Notify 
+          messages from xTRs to talk to Map-Resolvers and Map-Servers that make up the Mapping System.
+          More details are described in <xref target="RFC6833"/>.
+          </t>
+          
+          <t hangText="EID-to-RLOC Cache:">
+          The EID-to-RLOC Cache is a short-lived, ondemand table in an xTR (ITR) that stores, tracks, and is responsible for timing
+          out and otherwise validating EID-to-RLOC mappings. 
+          </t>
+          
+          <t hangText="EID-to-RLOC Database:">
+          The EID-to-RLOC Database is a global distributed database that contains all known EID-to-RLOC mappings. Each xTR (ETR) typically 
+          contains a small piece of the database. In this document, each Mapping System has full of the database.
+          </t>
+
+-->
+
+
+          
+          <t hangText="Device Identifier (ID):">
+          An ID is an identifier of host or end point such as UE or network function including VM instance, container, etc.  In ID-LOC architecture,
+          IP or MAC address, as unique value, is assigned to an end device. Values of the source and destination IP/MAC address fields of 
+          packets sent from end points are used as ID.
+          </t>
+          
+          <t hangText="Locator (LOC):">
+          A LOC is an IPv4 or IPv6 address of a LOC-node. In the case of SRv6 it can be the LOC-node's local SID representing the segment for which 
+          the LOC-node is the segment termination node.
+          </t>
+          
+          
+          <t hangText="LOC-node;">
+          A LOC-node is a node that has a unique locator within a network domain, and has functionalities 
+          to obtain destination locator and to forward packets to the LOC-node which has the locator.
+          This node has access to an ID-LOC mapping table and obtains destination locator by looking up destination
+          ID (destination address of a data packet) from the mapping table. If ID of the received packet is not registered in its 
+          own mapping table, a LOC-node requests mapping information of the ID and the assigned locator to ID-to-LOC mapping database. 
+          Also a LOC-node forwards packet to a peered LOC node by encapsulation or conversion of the IP header field such as IP address field, and 
+          decapsulates or reconverts packets received from another LOC-node. Different implementations of ID-LOC architecture use different forwarding 
+          mechanisms. LISP, for example, uses IPv4/v6 header and LISP header for encapsulation, whereas ILA tightly couples itself with IPv6, and 
+          SRv6 uses IPv6 and SIDs (Segment Identifiers).
+          </t>
+          
+          <t hangText="ID-to-LOC Mapping Database:">
+          An ID-to-LOC mapping database is a database which contains all known ID-to-LOC mappings within 
+          an ID-LOC domain. The mapping information is updated when an end point moves to under another 
+          LOC-node. This database is either owned by an individual system or each LOC-node. If an external system owns 
+          the database, each LOC-node has an interface to the system to send a request and receive mapping 
+          information.
+          </t>
+          
+          <t hangText="ID-to-LOC Mapping Table:">
+          An ID-LOC mapping table is a table in a LOC-node that stores ID-to-LOC mapping information and 
+          it is used for obtaining destination LOC from ID of received packet. ID-to-LOC mapping table 
+          typically contains a small piece of database. The table is updated when the LOC-node receives 
+          a new ID-to-LOC mapping information from ID-to-LOC mapping database or some of 5GS system.
+          </t>
+          
+          <t hangText="Mapping System:">
+          A mapping system is a function which stores ID-to-LOC mapping database. This system has interfaces 
+          to receive a request from a LOC-node and send an ID-to-LOC mapping to it. It may be composed of 
+          multiple components.
+          </t>
+
+          </list>
+          </t>
+
+
+
+        </section>
+          
+        <section title="Terms of 5GS">
+          <t>
+          <list style="hanging">
+          <t hangText="User Plane Function (UPF):">
+          An UPF handles the user plane paths. An UPF is connected to SMF with N4 interface. More detailed information is
+          described in <xref target="TS.23.501-3GPP"/>. This document defines two types of UPF, Central UPF (cUPF) and 
+          Distributed UPF (dUPF). Their features are described in <xref target="Sec_D-plane-Mech."/>
+          </t>
+          
+          <t hangText="Uplink Classifier (ULCL):">
+          An ULCL is an UPF functionality that aims at diverting Uplink traffic, based on filter rules provided by SMF, 
+          towards Data Network (DN).
+          </t>
+          
+          <t hangText="Data Network (DN):">
+          A DN is a network where network functions and entities, including operator or 3rd party services, are deployed. 
+          This document defines two types of DN, Central DN (cDN) and Distributed DN (dDN). Their features are described 
+          in <xref target="Sec_D-plane-Mech."/>.
+          </t>
+          
+          <t hangText="Radio Access Network (RAN):">
+          A RAN is an access network where radio bearer sent by UEs traverse. A RAN encapsulate users' packets with GTP-U.
+          </t>
+          
+          <t hangText="Session Management Function (SMF):">
+          An SMF is a function which provides control plane functionalities for handling user traffic.
+          </t>
+          
+          <t hangText="Application Function (AF):">
+          An AF is a control plane functionality and connected to SMF with Naf interfaces.
+          </t>
+<!--
+          <t hangText="Policy Control Function (PCF):">
+          A PCF is a function which provides control plane functionalities for management of policies of network or users.
+          </t>
+-->          
+          </list>
+          </t>
+        </section>
+    </section>
+
+    
+    <section anchor="Sec_D-plane-Mech."
+    title="Mechanism on Data Plane">
+      <t>
+      This approach achieves traffic forwarding with optimized path and session continuity by using ID-LOC and ULCL for 
+      particular communication including UE-to-UE or MEC (Mobile Edge Computing) communication. ULCL is one of 
+      fundamental functions of 5GC Rel.15 and it provides functionalities of packet filtering and divert for 
+      uplink packets sent by UEs.
+      </t>
+
+      <t>
+      The overview of the assumed 5GC architecture of data plane where the proposal approach works 
+      is shown in <xref target="fig_3GPP-5GC-Arch"/>. 
+      The details of numbered interfaces in the figure are described in <xref target="TS.23.501-3GPP"/>.
+      </t>
+
+
+<figure anchor="fig_3GPP-5GC-Arch"
+        title="Assumed 5GC Network Architecture">
+  <artwork><![CDATA[
+  
+                          .--.                                  
+                         (    )-.                               
+                       .'  cDN/  '                              
+                      (  Internet )                             
+                       (         -'                             
+                        '-(     )                               
+                           '---'                                
+                             |N6                                
+                       +-----+-----+                            
+                       |   cUPF    |                           ===
+                       +-----+-----+                            ^
+                             |N9                                |
+     ,-----------------------+-----------------------.          |
+    /                                                 \         |
+    |              Transport Network                  |         |
+    \                                                 /         |
+     `----+---------------------------+--------------'          
+          |N9                         |N9                   Connected
+    +-----+-----+    ,-----.    +-----+-----+    ,-----.       with
+    |   dUPF#1  |N6 /       \   |   dUPF#2  |N6 /       \     GTP-U
+    |       [UL]+---| dDN#A |   |       [UL]+---| dDN#B |..     
+    |       [CL]|   \       /   |       [CL]|   \       /       |
+    +-----+-----+    `-----'    +-----+-----+    `-----'        |
+          |N3                         |N3                       |
+                                                                |
+       (( o ))                     (( o ))                      |
+          A                           A                         v
+         /-\  RAN                    /-\  RAN                  ===
+        /-|-\                       /-|-\
+                   
+          |                           |
+           
+       [ UE ] ..                   [ UE ] ..
+
+                                            
+                                             dUPF: Distributed UPF
+                                             cUPF: Central UPF
+                                              dDN: Distributed DN
+                                              cDN: Central DN
+
+ ]]></artwork>
+</figure>
+
+      
+      <t>
+      This network has following features;
+      <list style="symbols">
+      <t>
+      A Central UPF (cUPF) is deployed at a connecting point to Central DN (cDN). A cUPF becomes anchor point for 
+      UEs and it assigns IP addresses (IDs) for each UE. The traffic transmitted from UEs are basically sent to the cUPF.
+      </t>
+      
+      <t>
+      Distributed UPFs (dUPFs) and Distributed DNs (dDNs) are deployed and geographically distributed at user edge side. 
+      A unique address space (it's not necessarily globally unique) is assigned to dDN. When a dUPF forwards an UE's uplink 
+      packet, and if the subnet of the destination address is the same as the one assigned to dDN at proximity, then dUPF, 
+      with the help of ULCL, may divert the packet to that dDN. Here, the ULCL identifies each encapsulated uplink packet to
+      be diverted, by checking if the destination of the inner packet is one of IP addresses assigned the dDN.
+      A dUPF removes GTP-U header from the packets, and sends them to dDN via N6. When dUPF receives packets from dDN, dUPF 
+      encapsulates them with GTP-U header, and merges them into downlink packets from cUPF. 
+      An overview of behaviors of dUPF and ULCL is shown in <xref target="fig_dUPF-ULCL-Behaivor"/>.
+<!--      
+      Each dUPF has an ULCL, and unique address space (it's not necessarily uniquie globally) is assigned to each dDN.  As an 
+      example of usage ULCL, ULCL identifies each uplink packet encapsulated by GTP-U, and divert the packet to 
+      the nearest dDN with decupsulation of the GTP-U header if the destination of the inner packet is one of IP 
+      addresses assigned the dDN.
+-->      
+      </t>
+      
+      <t>
+       Network topology between RAN and dUPF/cUPF adopts tree structure and the section between RAN and dUPF and the section 
+       between dUPF and cUPF are connected with GTP-U.
+      </t>
+      </list>
+      </t>
+      
+
+
+
+
+
+
+
+
+
+
+<figure anchor="fig_dUPF-ULCL-Behaivor"
+        title="Behaviors of dUPF and ULCL">
+  <artwork><![CDATA[
+  
+      GTP-U packets    GTP-U packets                            
+       from cUPF        to cUPF                                 
+       
+            |            ^                                      
+            |     N9     |                                      
+            |            |                                      
+       +----|------------|-----+                                
+       |    |    dUPF    |     |            ,---------.         
+       |    v            |     | IP packet /           \        
+       |    o<-----------------------------|           |        
+       |    |            |     |           |           |        
+       |    |            |     |    N6     |   dDN     |        
+       |    |        +------+  |           |           |        
+       |    |        | ULCL |------------->|           |        
+       |    |        +------+  | IP packet |           |        
+       |    |            ^     |           \           /        
+       +----|------------|-----+            `---------'         
+            |            |                                      
+            |            |                                      
+            |    N3      |                                      
+            v            |                                      
+                                                                
+      GTP-U packets   GTP-U packets                             
+       to UE           from UE                                  
+                                                                
+
+ ]]></artwork>
+</figure>
+
+
+
+
+
+      <t>
+      In the proposal approach, a LOC-node is installed between dUPF and dDN. LOC-nodes are connected 
+      with a IP mechanism such as IP tunnels or translation of destination IP field. As examples of such data plane
+      protocols for providing connectivity between LOC-nodes, IPv4/v6 header with LISP header or SRv6 
+      (<xref target="I-D.ietf-6man-segment-routing-header"/>) can be used.
+      In addition, each LOC-node has connectivity with one or more Mapping Systems. The overview is shown in <xref target="fig_Proposal-Arch"/>.
+      </t>
+
+<figure anchor="fig_Proposal-Arch"
+        title="Proposal Network Architecture">
+  <artwork><![CDATA[
+
+                          .--.                                
+                         (    )-.                             
+                       .'  cDN/  '                            
+                      (  Internet )                           
+                       (         -'                           
+                        '-(     )                             
+                           '---'                              
+                             |N6         ,---------.          
+                       +-----+-----+     | Mapping |          
+                       |   cUPF    |     | System  |          
+                       +-----+-----+     `---------'          
+                             |N9              .               
+     ,-----------------------+----------------.---------.     
+    / Transport Network   . . . . . . . . . . . . . . .  \    
+    |                     .                           .  |    
+    \                  #===========================#===  /    
+     `----+------------#--.-----------+------------#--.-'     
+          |N9          #  .           |N9          #  .       
+    +-----+-----+   +-------+   +-----+-----+   +-------+     
+    |   dUPF#1  |N6 | LOC-  |   |   dUPF#2  |N6 | LOC-  |     
+    |       [UL]+---+ Node#1|   |       [UL]+---| Node#2|..   
+    |       [CL]|   |       |   |       [CL]|   |       |     
+    +-----+-----+   +---+---+   +-----+-----+   +---+---+     
+          |N3           |             |N3           |         
+                     ,-----.                     ,-----.      
+       (( o ))      /       \      (( o ))      /       \     
+          A         | dDN#A |         A         | dDN#B |     
+         /-\  RAN   \       /        /-\  RAN   \       /     
+        /-|-\        `-----'        /-|-\        `-----'
+                   
+          |                           |
+           
+       [ UE ] ..                   [ UE ] ..
+
+                                            
+                                   =====  : Connection between LOC nodes
+                                   . . .  : IF to Mapping System
+                                            
+ ]]></artwork>
+</figure>
+
+
+      <t>
+      Each dUPF has a filter table of ULCL. Each filter table is configured to match addresses assigned within own 
+      network domain (i.e., addresses for UEs assigned by cUPF) or assigned corresponding 
+      with address space of some of dDN. UPFs monitor each uplink GTP-U packet with its ULCL and divert it 
+      to the connected LOC-node with decapsulation of GTP-U if the destination address of the inner packet (payload) matches the filtering table. When 
+      LOC-node receives a packet from the dUPF, it obtains LOC which the destination of the packet (ID) belongs to by looking up 
+      its own ID-to-LOC mapping table or querying it from the Mapping System according ID-LOC mechanism. Then it sends the packet to peered LOC-node 
+      indicated by the LOC. The peered LOC-node converts the received packet to appropriate form
+      and forwards them the destination by following its own forwarding table.
+      </t>
+
+<!--
+      <t>
+      The detailed processing flow with LISP below as an example. In this example, a Mapping System obtains location of each UE from SMF and 
+      keeps its own EID-to-RLOC mapping database up to date. Each xTR obtains EID-to-RLOC map information which isn't stored in the cache 
+      by sending Map-Request to a Mapping System.
+      </t>
+
+      <t>
+      <list style="hanging">
+      <t hangText="1.">
+      xTR (source xTR)  receives a packet and identify the EID.
+      </t>
+      
+      <t hangText="2.">
+      The source xTR looks up the EID from its own EID-to-RLOC mapping cache.
+      </t>
+      
+      <t hangText="3.">
+      If there is an entry which matches to the EID, the source xTR sends the packet to the destination indicated by the RLOC of the entry.
+      </t>
+      
+      <t hangText="4.">
+      If there are no entries matches to the EID, xTR sends a request mapping information of the EID (Map-Request) to the Mapping System 
+      depending on its own forwarding table.
+      </t>
+      
+      <t hangText="5.">
+      Mapping System receives the request and detect the RLOC which the EID is allocated from its own EID-to-RLOC mapping database.
+      </t>
+      
+      <t hangText="6.">
+      Mapping System sends the request to the xTR assigned the RLOC (peered xTR).
+      </t>      
+      
+      <t hangText="7.">
+      The peered xTR receives the request and registers the EID and RLOC, and sends a reply (Map-reply) to the source xTR.
+      </t>      
+      
+      <t hangText="8.">
+      The source xTR receives the reply and register the opponent xTR into own EID-to-RLOC mapping cache.
+      </t>
+      
+      <t hangText="9.">
+       If the peered xTR is the same as Source xTR itself, the source xTR sends the packet to either dDN or dUPF according to the 
+       destination of the packets.  Otherwise, the source xTR sends the packet to the peered xTR with necessary encapsulation.
+      </t>
+      
+      <t hangText="10.">
+      When an xTR receives packets from other xTRs, it sends them with decapsulation to the appropriate destinations depending 
+      on its forwarding table.
+      </t>
+      
+      </list>
+      </t>
+-->     
+      <t>
+      From such processes, forwarding paths of user traffic diverted by ULCL from 5GC to LOC-node are optimized.
+      </t>
+      
+      <t>
+      A cUPF is connected with dUPFs via N9 interface and packets are forwarded with GTP-U encapsulation between cUPF and dUPF.
+      </t>
+      
+      <t>
+      Some case studies of ID-LOC protocols are described in <xref target="app1"/> and <xref target="app2"/>.
+      </t>
+      
+    </section>
+
+
+
+    <section title="Mechanisms on Control Plane">
+      <t>
+      For ID-LOC mechanism in mobile networks, a control plane mechanism to manage 
+      location information of UEs is required. There are mainly three 
+      models to realize control plane mechanism for ID-LOC as follows:
+      </t>
+      
+      <t>
+      <list style="hanging">
+      <t hangText="Model 1:">
+      Independent Control Planes
+      </t>
+      
+      <t hangText="Model 2:">
+      Interworking Control Planes
+      </t>
+      
+      <t hangText="Model 3:">
+      Integrated Control Planes
+      </t>
+      </list>
+      </t>
+
+      <t>
+      Some of models may require to use 5GS interfaces or add some functionalities to functions of 5GC.
+      5GS architecture and the service-based interfaces are shown in <xref target="fig_3GPP-5GS-IF"/>. 
+      The details of functions and interfaces are described in <xref target="TS.23.501-3GPP"/>.
+      </t>
+
+<figure anchor="fig_3GPP-5GS-IF"
+        title="5GS Architecture and Service-based Interfaces">
+  <artwork><![CDATA[
+
+
+   +-----+  +-----+  +-----+     +-----+  +-----+  +-----+
+   |NSSF |  | NEF |  | NRF |     | PCF |  | UDM |  | AF  |
+   +--+--+  +--+--+  +--+--+     +--+--+  +--+--+  +--+--+
+ Nnssf|    Nnef|    Nnrf|       Npcf|    Nudm|        |Naf
+   ---+--------+--+-----+--+--------+--+-----+--------+-
+             Nausf|    Namf|       Nsmf|
+               +--+--+  +--+--+     +--+--+
+               |AUSR |  | AMF |     | SMF |
+               +-----+  +--+--+     +-----+
+                          /|           |
+C-plane                N1/ |N2         |N4
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D-plane               /    |           |
+                  N1 /     |N2         |N4
+                    /      |           |
+                 +-+-+  +--+--+ N3  +--+--+ N6  +----+
+                 |UE +--+(R)AN+-----+ UPF +-----+ DN |
+                 +---+  +-----+     +-----+     +----+
+
+
+ ]]></artwork>
+</figure>
+
+      
+      <section title="Model 1: Independent Control Planes">
+      <t>
+      In this model, control plane of 5GC and ID-to-LOC mapping mechanism are completely separated.
+      Information of an UE and a LOC-node which the UE is attached is sent to a mapping system and registered 
+      in the mapping database only when the LOC-node receives a packet from the UE and the UE is not 
+      registered yet.
+      </t>
+      
+      <t>
+      This model does not cause any impacts on 5GC architecture. However, in this model, an UE cannot 
+      be accessed from other UEs within the same network domain until a packet from the UE is diverted to 
+      the LOC-node by the UPF which the UE is located and the EID and RLOC are registered to the Mapping System.
+      </t>
+      </section>
+      
+      <section title="Model 2: Interworking Control Planes">
+      <t>
+      In this model, a mapping system interworks with an SMF which manages sessions of each UE. 
+      A scheme to inform, that an UE moves and is relocated to another UPF, from SMF to AF 
+      via Naf interface is defined in 5GS (<xref target="TS.23.502-3GPP"/>)*. 
+      A Mapping System is installed as an AF and obtains mobility information of UEs with the above scheme.
+      </t>
+      
+      <t>
+      * The stage 3 of discussion of 5GS has not been fixed yet and the specification may be changed.
+      </t>
+      
+      <t>
+      This model would not cause any impacts on 5GS architecture, and a mapping system can always 
+      keep the current mobility information of each UE. 
+      </t>
+      </section>
+
+      <section title="Model 3: Integrated Control Planes">
+      <t>
+      In this model, SMF functionalities are integrated into a mapping system. In other words, the mapping system
+      becomes a part of 5GS. In 5GS architecture, an 
+      SMF has a role of session management of UEs, and it updates its own mapping database depending on 
+      movement of an UE.
+      </t>
+      
+      <t>
+      This approach enables to always keep mapping databases the latest status, however, it obviously requires extension 
+      or replacement of SMF actually deployed in 5GS network.
+      </t>
+      </section>
+    </section>
+
+
+
+    <section title="Features Analysis">
+      <section title="Benefits">
+        <t>
+        <list style="hanging">
+        <t hangText="o">
+        This approach provides a mechanism for introducing ID-LOC architecture into 5GS with no or nominal impact, and achieves optimized forwarding 
+        with session continuity in the assumed use cases such as UE-to-UE or UE-to-dDN communications.
+        </t>
+        
+        <t hangText="o">
+        Regarding communication to the cDN, this approach can keep scalability because it does not change the current mechanism of 5GS. 
+        (ID-LOC-native network or full-overlay approaches need to deploy LOC-node at the cUPF, and thus the ID-to-LOC mapping table may not 
+        scale up enough in that cases. Here, a full-overlay approach means making an ID-LOC system run over the whole 5GC network.)
+        </t>
+        </list>
+        </t>
+      </section>
+      
+      <section title="Issues">
+        <t>
+        <list style="hanging">
+        <t hangText="o">
+         dUPF and LOC-node are separated, and thus an extra hop may occur against the optimized forwarding. However, it can be 
+         resolved by implementing dUPF and LOC-node within a same box or application.
+        </t>
+        </list>
+        </t>      
+      </section>
+    </section>
+    
+    
+    
+
+
+    <section title="Security Considerations">
+    <t>
+    TBD
+    </t>
+    </section>
+    
+    <section title="IANA Considerations">
+    <t>
+    This memo includes no request to IANA.
+    </t>
+    </section>
+    
+    <section title="Acknowledgement">
+    <t>
+    The authors would like to thank Ryosuke Kurebayashi, Koji Tsubouchi, Toru Okugawa, and Dino Farinacci for their kind reviews and technical feedback.
+    </t>
+    </section>
+
+  </middle>
+
+  <!-- ***** BACK MATTER ***** -->
+
+  <back>
+    <references title="Informative References">
+
+    &RFC6830;
+    &RFC6831;
+    &RFC6832;
+    &RFC6833;
+    &RFC6836;
+    &RFC7215;
+    &RFC8061;
+    &RFC8111;
+    &I-D.draft-ietf-6man-segment-routing-header;
+    &I-D.draft-farinacci-lisp-mobile-network;
+<!--
+    &I-D.draft-bogineni-dmm-optimized-mobile-user-plane;
+-->
+    &I-D.draft-ietf-lisp-eid-mobility;
+    &I-D.draft-herbert-intarea-ila;
+    
+
+      <reference anchor='I-D.bogineni-dmm-optimized-mobile-user-plane'>
+      <front>
+      <title>Optimized Mobile User Plane Solutions for 5G</title>
+        <author initials="K" surname="Bogineni" fullname="Kalyani Bogineni">
+        <organization/>
+        </author>
+        <author initials="A" surname="Akhavain" fullname="Arashmid Akhavain">
+        <organization/>
+        </author>
+        <author initials="T" surname="Herbert" fullname="Tom Herbert">
+        <organization/>
+        </author>
+        <author initials="D" surname="Farinacci" fullname="Dino Farinacci">
+        <organization/>
+        </author>
+        <author initials="A" surname="Rodriguez-Natal" fullname="A. Rodriguez-Natal">
+        <organization/>
+        </author>
+        <date month="March" day="5" year="2018"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-bogineni-dmm-optimized-mobile-user-plane-00"/>
+        <format type="TXT" target="http://www.ietf.org/internet-drafts/draft-bogineni-dmm-optimized-mobile-user-plane-00.txt"/>
+      </reference>
+
+      <reference anchor='TS.23.501-3GPP'
+       target='http://www.3gpp.org/ftp//Specs/archive/23_series/23.501'>
+        <front>
+        <title>3GPP TS 23.501</title>
+        <author>
+        <organization>
+        3rd Generation Partnership Project (3GPP)
+        </organization>
+        </author>
+        <date month="December" year="2017"/>
+        </front>
+      </reference>
+
+
+      <reference anchor='TS.23.502-3GPP'
+       target='http://www.3gpp.org/ftp//Specs/archive/23_series/23.502'>
+        <front>
+        <title>3GPP TS 23.502</title>
+        <author>
+        <organization>
+        3rd Generation Partnership Project (3GPP)
+        </organization>
+        </author>
+        <date month="December" year="2017"/>
+        </front>
+      </reference>
+    </references>
+
+
+
+    <!-- Appendix -->
+    
+    <section anchor="app1"
+    		title="Case Studies on Use of LISP">
+      <t>
+      This Appendix describes detailed processes of the proposal approach with LISP mechanism in the following types of communications.
+      </t>
+      
+      <t>
+      <list style="hanging">
+      <t hangText="1.">
+      UE-to-UE Communication
+      </t>
+      
+      <t hangText="2.">
+      UE-to-dDN Communication
+      </t>
+      
+      <t hangText="3.">
+      UE-to-cDN/Internet Communication
+      </t>
+      
+      </list>
+      </t>
+
+<!--      
+      <t>
+      The detailed specifications of LISP are described in <xref target="RFC6830"/>,
+      <xref target="RFC6831"/>, <xref target="RFC6832"/>, <xref target="RFC6833"/>, <xref target="RFC6836"/>, <xref target="RFC7215"/>,
+      <xref target="RFC8061"/>, and <xref target="RFC8111"/>. Moreover, definitions and specifications of another approach to introduce 
+      LISP into 3GPP 5GS is described in <xref target="I-D.farinacci-lisp-mobile-network"/>.
+      </t>
+-->
+      
+      <t>
+      In the following description of case studies, ID and Locator are called EID (End-point Identifier) 
+      and RLOC (Routing Locator) in LISP terms. Mapping Server has the master of EID-to-RLOC mapping database, 
+      and each xTR (Ingress/Egress Tunnel Router) has EID-to-RLOC mapping cache. An xTR obtains the destination 
+      RLOC from its own cache by looking up the destination EID of received packet. They obtain mappings 
+      from the mapping system if an EID looked up is not registered in the cache. Packets are passed between 
+      xTRs with some tunnel protocols. 
+      </t>
+      
+      <section title="UE-to-UE Communication">
+      <t>
+      In the current architecture, a cUPF becomes an anchor point for UEs, and all packets between UEs 
+      even those which are located to the same dUPF are transferred through the anchor point. This may cause communication 
+      delay and inefficient resource usage. In the proposed procedure, packets can be transferred without going through 
+      an anchor point, and low latency and efficient resource usage can be achieved.
+      </t>
+      
+      <t>
+      The UE-to-UE communications include communications between UEs located to different dUPFs (Case 1), and communication 
+      between UEs located to the same dUPF (Case 2). In this section, the detailed procedures of the cases are described. 
+      </t>
+      
+      <t>
+      Moreover, in a mobile network, an UE may move during communications. This section describes problems and considerations 
+      about UE's handover in such case.
+      </t>
+      
+        <section title="Case A-1: UEs allocated different dUPF">
+
+<figure anchor="fig_Process-CaseA-1"
+		title="Procedure in Case A-1">
+  <artwork><![CDATA[
+
+                    +-------+
+                    |Mapping|
+                    |System |
+                    +-------+
+                      .
+                      .
+                      .
+                  (3) .   #==========================#
+                      .   #           (4)            #
+                      .   #                          V
+    +-------+       +-------+      +-------+      +-------+
+    | dUPF#1|       | xTR#1 |      | dUPF#2|      | xTR#2 |
+    |       |       | RLOC=X|      |+------|<-----| RLOC=Y|
+    |   [UL]|       |       |      ||  [UL]|  (5) |       |
+    |   [CL]|------>|       |      |v  [CL]|      |       |
+    +-------+  (2)  +-------+      +-------+      +-------+
+         ^                          |     
+         | (1)                      |(6)
+         |                          v
+                                       
+       [UE#1]                     [UE#2]
+       EID=a-1                    EID=a-2
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, addresses are assigned to UEs from a address space [A].
+          These addresses are described as a-n (n=1,2,..). EID=a-1 and a-2 are assigned to UE#1 and UE#2.
+          </t>
+          
+          <t hangText="(1)">
+          UE#1 sends packets to UE#2 with setting EID=a-2 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner packet of received GTP-U packet and divert it to xTR#1 with decapsulation
+          if the destination address is one of address space [A].
+          </t>
+          
+          <t hangText="(3)">
+          xTR#1 updates own EID-to-RLOC mapping chace by interaction with Mapping System (if needed).
+          </t>
+          
+          <t hangText="(4)">
+          xTR#1 obtains the RLOC(=Y) of EID=a-2 from the EID-to-RLOC mapping cache, and sends the packets to 
+          the xTR#2 with a tunnel with RLOC=Y as the destination address.
+          </t>
+          
+          <t hangText="(5)">
+          xTR#2 decapsulate the packets, and sends them to dUPF#2.
+          </t>
+          
+          <t hangText="(6)">
+          dUPF#2 encapsulate packets with GTP-U header, and sends them to UE#2.
+          </t>      
+          </list>
+          </t>
+        </section>
+    
+        <section title="Case A-2: UEs allocated the same xTR">
+
+<figure anchor="fig_Process-CaseA-2"
+		title="Procedure in Case A-2">
+  <artwork><![CDATA[
+
+                    +-------+
+                    |Mapping|
+                    |System |
+                    +-------+
+                      .
+                      .
+                      .
+                  (3) .
+                      .
+                      .
+    +-------+       +-------+      +-------+      +-------+
+    | dUPF#1|  (4)  | xTR#1 |      | dUPF#2|      | xTR#2 |
+    |+------|<----- | RLOC=X|      |       |      | RLOC=Y|
+    ||  [UL]|       |       |      |   [UL]|      |       |
+    |v  [CL]|------>|       |      |   [CL]|      |       |
+    +-------+  (2)  +-------+      +-------+      +-------+
+     |     ^
+ (5) |     | (1)
+     v     |
+
+  [UE#2]  [UE#1]
+ EID=a-2  EID=a-1
+       
+  ]]></artwork>
+</figure>
+    
+        <t>
+        <list style="hanging">
+        <t hangText="(0)">
+        Within this network, addresses are assigned to UEs from a address space [A]
+        These addresses are described as a-n (n=1,2,..). EID=a-1 and a-2 are assigned to UE#1 and UE#2.
+        </t>
+        
+        <t hangText="(1)">
+        UE#1 sends packets to UE#2 with setting EID=a-2 as the destination IP address.
+        </t>
+        
+        <t hangText="(2)">
+        dUPF#1 monitors inner packets of received GTP-U traffic and divert it to xTR#1 with decapsulation
+        if the destination address is one of address space [A].
+        </t>
+        
+        <t hangText="(3)">
+        xTR#1 updates own EID-to-RLOC mapping cache by interaction with Mapping System (if needed).
+        </t>
+        
+        <t hangText="(4)">
+        xTR#1 obtains the RLOC(=X) from the EID-to-RLOC mapping cache. Since RLOC=X indicates itself, xTR#1 
+        sends the packets back to dUPF#1.
+        </t>
+        
+        <t hangText="(5)">
+        dUPF#2 encapsulate packets with GTP-U, and sends them to UE#2.
+        </t>
+        </list>
+        </t>
+        </section>
+
+        <section title="Consideration of Case that UE Moves to under Another xTR">
+        <t>
+        When an UE moves to a serving area of another dUPF during communication with another UE, 
+        EID-to-RLOC mapping database of a Mapping System and the tables of the xTR and the peered xTR must be updated. 
+        The xTRs can't send packets to the appropriate xTR during the updating, and thus packet drop or stalling may occur. 
+        </t>
+        
+        <t>
+        To mitigate this problem, further consideration is needed.  For example, a mechanism that immediately advertise 
+        the update of location of UEs to Mapping System and the appropriate xTRs depending on movement of each UE might 
+        be required. Also, some documents (e.g., [I-D.ietf-lisp-eid-mobility]) discuss this problem.
+        </t>
+        </section>
+      </section>
+    
+      <section title="UE-to-dDN Communication">
+      <t>
+      The UE-to-dDN communications basically correspond the communication between an UE and neighbor dDN (Case3). 
+      On the other hand, if an UE moved under another dUPF during usage of a statefull application, or the application is not 
+      uniformly deployed in every dDN, the UE needs to continue 
+      to communicate with the previous dDN (Case4).
+      </t>
+      
+      <t>
+      In such cases, in the current architecture, all packets are needed to go through the anchor point or dynamic GTP tunnel 
+      reconfiguration between dUPF is required. The former solution causes additional communication delay and inefficient resource usage. 
+      The latter solution increase the cost of 5GS control plane to dynamically update the GTP tunnel with multiple UPFs and their 
+      ULCL filter tables along with the movement of the UE. The propal approach achieves appropriate packet transfer in such cases.
+      </t>
+      
+      <t>
+      In this section, the detailed procedures of communications between an UE and neighbor dDN and communications between 
+      an UE and non-neighbor dDN
+      </t>
+      
+        <section title="Case A-3: UE communicates with neighbor dDN">
+
+<figure anchor="fig_Process-CaseA-3"
+		title="Procedure in Case A-3">
+  <artwork><![CDATA[
+
+                    +-------+
+                    |Mapping|
+                    |System |
+                    +-------+
+                      .
+                      .
+                      .
+                  (3) .
+                      .
+                      .
+    +-------+       +-------+      +-------+      +-------+
+    | dUPF#1|  (6)  | xTR#1 |      | dUPF#2|      | xTR#2 |
+    |+------|<----- | RLOC=X|      |       |      | RLOC=Y|
+    ||  [UL]|       |       |      |   [UL]|      |       |
+    |v  [CL]|------>|       |      |   [CL]|      |       |
+    +-------+  (2)  +-------+      +-------+      +-------+
+     |    ^           |  ^
+ (7) |    | (1)    (4)|  | (5)
+     v    |           v  |
+                    ,-------.
+     [UE#1]        /  dDN#B  \
+     EID=a1        |  |  ^   |
+                   |  v  |   |
+                   | [APL#1] |
+                   \ EID=b-1 /
+                    `-------'
+                     
+  ]]></artwork>
+</figure>
+    
+        <t>
+        <list style="hanging">
+        <t hangText="(0)">
+        Within this network, UEs are assigned their addresses from an address space [A]. These addresses are 
+        described as a-n (n=1,2,...). Also, applications in dDN#B are assigned their addresses
+        from a address space [B]. These addresses are described as b-n (n=1,2,..).
+        EID=a-1 and b-1 assigned to UE#1 and APL#1 which is located in dDN#B.
+        </t>
+        
+        <t hangText="[Uplink Processes]">
+        </t>
+        
+        <t hangText="(1)">
+        UE#1 sends packets to dDN#B with setting EID=b-1 as the destination IP address.
+        </t>
+        
+        <t hangText="(2)">
+        dUPF#1 monitors inner of received GTP-U packets and divert it to xTR#1 with decapsulation
+        if the destination IP address is one of address space [B].
+        </t>
+        
+        <t hangText="(3)">
+        xTR#1 updates own EID-to-RLOC mapping cache by interaction with Mapping System (if needed). Or xTR#1 may update 
+        its own cache by a Map-Notify message when an APL is deployed or deleted in dDB#B.
+        </t>
+        
+        <t hangText="(4)">
+        xTR#1 obtains RLOC(=X) of EID=b-1 from the EID-to-RLOC mapping cache. Since RLOC=X indicates itself and 
+        EID=b-1 is within [B], xTR#1 sends the packets to the dDN#B.
+        </t>
+        
+        <t hangText="[Downlink Processes]">
+        </t>
+        
+        <t hangText="(5)">
+        APL#1 in dDN#B sends packets to UE#1 with setting EID=a-1 as the destination IP address.
+        </t>
+        
+        <t hangText="(6)">
+        xTR#1 obtains RLOC of EID=a-1 (i.e., RLOC=X) from the EID-to-RLOC mapping cache. Since RLOC=X 
+        indicates xTR#1 itself, xTR#1 sends packets to dUPF#1.
+        </t>
+        
+        <t hangText="(7)">
+        dUPF#2 encapsulates packets with GTP-U, and sends them to UE#1.
+        </t>      
+        </list>
+        </t>
+        </section>
+
+        <section title="Case A-4: UE communicates with non-neighbor dDN">
+
+<figure anchor="fig_Process-CaseA-4"
+		title="Procedure in Case A-4">
+  <artwork><![CDATA[
+
+                    +-------+
+                    |Mapping|
+                    |System |
+                    +-------+
+                      .
+                      .               (7)
+                      . #==============================#
+                  (3) . # #==========================# #
+                      . # #           (4)            # #
+                      . V #                          V #
+    +-------+       +-------+      +-------+      +-------+
+    | dUPF#1|  (8)  | xTR#1 |      | dUPF#2|      | xTR#2 |
+    |+------|<------| RLOC=X|      |       | (0)  | RLOC=Y|
+    ||  [UL]|       |       |      |   [UL]|<---->|       |
+    |v  [CL]|------>|       |      |   [CL]|      |       |
+    +-------+  (2)  +-------+      +-------+      +-------+
+     |    ^                           ^             |  ^
+ (9) |    | (1)                       | (0)      (5)|  | (6)
+     v    |                           |             v  |
+                      (0)             v           ,-------.
+     [UE#1] <= = = = = = = = = = = =[UE#1]       /  dDN#C  \
+     EID=a-1 UE#1 moves to the serving area of   |  |  ^   |
+           dUPF#1 from the serving area of UPF#2 |  v  |   |
+                                                 | [APL#2] |
+                                                 \ EID=c-1 /
+                                                  `-------'
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are assigned their addresses from an
+          address space [A]. These addresses are described
+          as a-n (n=1,2,..). And applications in dDN#C are assigned their
+          addresses from an address space [C].  These addresses are described
+          as c-n (n=1,2,..).  EID=a-1 and c-1 assigned to UE#1 and APL#2 which is located in
+          dDN#C. UE#1 has moved to the serving area of dUPF#1 from the serving area of UPF#2 
+          while communicating to APL#2.
+          </t>
+          
+          <t hangText="[Uplink Processes]">
+          </t>
+          
+          <t hangText="(1)">
+          UE#1 sends packets to APL#2 with setting EID=c-1 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors each inner packet of received GTP-U traffic and divert it to xTR#1 with 
+          decapsulation if the destination address is one of address space [C].
+          </t>
+          
+          <t hangText="(3)">
+          xTR#1 updates own EID-to-RLOC mapping cache by interaction with Mapping System (if needed).
+          </t>
+          
+          <t hangText="(4)">
+          xTR#1 obtains RLOC(=Y) of EID=c-1 from the EID-to-RLOC mapping cache, and sends the packet to 
+          the xTR#2 with a tunnel with RLOC=Y as the destination address.
+          </t>
+          
+          <t hangText="(5)">
+          xTR#2 decapsulates the packets received from xTR#1, and sends them to dDN#C depending on its forwarding table.
+          </t>
+          
+          <t hangText="[Downlink Processes]">
+          </t>
+               
+          <t hangText="(6)">
+          APL#2 sends packets to UE#1 with setting EID=a-1 as the destination IP address.
+          </t>
+          
+          <t hangText="(7)">
+          xTR#2 obtains RLOC(=X) of EID=a-1 from the EID-to-RLOC mapping cache, and sends the packets to 
+          the xTR#1 with a tunnel with RLOC=X as the destination address.
+          </t>      
+          
+          <t hangText="(8)">
+          xTR#1 decapsulates the packets received from xTR#2m and sends them to the dUPF#1 depending on its forwarding table.
+          </t>      
+        
+          <t hangText="(9)">
+          dUPF#1 encapsulates the packets with GTP-U and sends packets to UE#1.
+          </t>      
+          </list>
+          </t>
+        </section>
+      </section>
+      
+      <section title="UE-to-cDN/Internet Communication">
+      <t>
+      UE-to-cDN/Internet communication is achieved by GTP-U mechanism originally equipped in 3GPP 5GS architecture. 
+      In this section, we describe processes of UE-to-cDN communication in the proposal architecture as an example.
+      </t>
+      
+        <section title="Case A-5: UE communicates with cDN">
+
+<figure anchor="fig_Process-CaseA-5"
+		title="Procedure in Case A-5">
+  <artwork><![CDATA[
+
+
+                          ,------------.
+                         /     cDN      \
+                         |              |
+                         |    EID=d-1   |
+                         |    [APL#3]   |
+                         |     |  ^     |
+                         \     |  |     /
+                          `------------'
+                           (4) |  | (3)
+                               v  |
+                          +-----------+
+                          |   cUPF    |
+                          +-----------+
+                               |  ^
+                     (5)       |  |
+          +--------------------+  |
+          |                       |
+          |  +--------------------+
+          |  |       (2)
+          V  |
+       +-------+       +-------+
+       | dUPF#1|       | xTR#1 |
+       |       |       | RLOC=X|
+       |   [UL]|       |       |
+       |   [CL]|       |       |
+       +-------+       +-------+
+         |  ^     
+     (6) |  | (1) 
+         v  |     
+
+        [UE#1]  
+        EID=a-1 
+
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are assigned their addresses from an
+          address space [A]. These addresses are described
+          as a-n (n=1,2,..). And applications in cDN are assigned their
+          addresses from an address space [D].  These addresses are described
+          as d-n (n=1,2,..).  EID=a-1 and d-1 assigned to UE#1 and APL#3 which is located in
+          cDN. 
+          </t>
+          
+          <t hangText="[Uplink Processes]">
+          </t>
+          
+          <t hangText="(1)">
+          UE#1 sends packets to cDN with setting EID=d-1 as the destination IP address.
+
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner of received GTP-U packets. Since the destination IP address (EID=d-1) does 
+          not hit the filter of ULCL, dUPF#1 re-encapsulates the packet to another GTP-U connecting to cUPF 
+          and forwards to cUPF.
+          </t>
+          
+          <t hangText="(3)">
+          cUPF decapusalates GTP-U packets and forwards them to APL#3 in cDN depending on its own forwarding table.
+          </t>
+          
+          <t hangText="[Downlink Processes]">
+          </t>
+          
+          <t hangText="(4)">
+          APL#3 in cDN sends packets to UE#1 with setting EID=a-1 as the destination IP address.
+          </t>
+          
+          <t hangText="(5)">
+          cUPF encapsulates the packets received from APL#3 and forwards them to dUPF#1 depending on its own 
+          forwarding table.
+          </t>
+          
+          <t hangText="(6)">
+          dUPF re-encapsulates the packets to another GTP-U and forwards to UE#1.
+          </t>
+          </list>
+          </t>
+        </section>
+      </section>
+    </section>
+
+    <section anchor="app2"
+    		title="Case Studies on Use of ILA">
+      <t>
+      This Appendix describes detailed processes of the proposal approach with ILA mechanism
+   in the following types of communications.
+      </t>
+      
+      <t>
+      <list style="hanging">
+      <t hangText="1.">
+      UE-to-UE Communication
+      </t>
+      
+      <t hangText="2.">
+      UE-to-dDN Communication
+      </t>
+      
+      <t hangText="3.">
+      UE-to-cDN/Internet Communication
+      </t>
+      
+      </list>
+      </t>
+<!--
+      <t>
+      The detailed specifications of LISP are described in <xref target="I-D.herbert-intarea-ila"/>.
+      </t>
+-->
+      <t>
+      Each ILA node has ID-to-LOC mapping table. Mappings are propagated amongst ILA routers or hosts in a 
+      network using mapping propagation protocols.
+      </t>
+      
+      <t>
+      In the following description of case studies, a mapping system, called ILA resolver in ILA terms, 
+      has the master of ID-to-LOC mapping database, and each ILA node obtains mappings from the mapping system. 
+      In some cases, each ILA node has an ID-to-LOC mapping database.
+      </t>
+      
+      <t>
+      In ILA, an SIR address expressed by composition of SIR prefix and identifier is assigned to each UE 
+      or VM instance. An SIR prefix and an identifier are described SIR_prefix_n and id_m (n=1,2,..., m=1,2,...), 
+      and an SIR address is expressed as SIR_addr_x =[n,m] (x=1,2,...) in the following description. Also, each ILA-
+      Nodes are assigned unique Locators, which is a network prefix that routes to a host. Locators are described 
+      as loc_n (n=1,2,..).
+      </t>
+      
+      <section title="UE-to-UE Communications">
+      <t>
+      The overview of this communication type is described in A.1.
+      </t>
+        
+        <section title="Case B-1: UEs allocated different dUPF">
+
+<figure anchor="fig_Process-CaseB-1"
+		title="Procedure in Case B-1">
+  <artwork><![CDATA[
+
+                       +-------+
+                       |Mapping|
+                       |System |
+                       +-------+
+                         .
+                         .
+                         .
+                     (3) .   #==========================#
+                         .   #           (4)            #
+                         .   #                          V
+       +-------+       +-------+      +-------+      +-------+
+       | dUPF#1|       | ILA-  |      | dUPF#2|      | ILA-  |
+       |       |       | Node#1|      |+------|<-----| Node#2|
+       |   [UL]|       |       |      ||  [UL]|  (5) |       |
+       |   [CL]|------>| loc_1 |      |v  [CL]|      | loc_2 |
+       +-------+  (2)  +-------+      +-------+      +-------+
+            ^                          |
+            | (1)                      |(6)
+            |                          v
+
+          [UE#1]                     [UE#2]
+    SIR_addr_1=[1,1]             SIR_addr_2=[1,2]
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix is assigned to UEs. 
+SIR_addr_1=[1,1] and  SIR_addr_2=[1,2] are assigned to UE#1 and UE#2.
+          </t>
+          
+          <t hangText="(1)">
+          UE#1 sends packets to UE#2 with setting SIR_addr_2 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner packet of received GTP-U packet and diverts it to ILA-Node#1 with decapsulation 
+          if the prefix of the destination address is SIR_prefix_1.
+          </t>
+          
+          <t hangText="(3)">
+          ILA-Node#1 updates own ID-to-LOC mapping table by interaction with the mapping system (if needed).
+          </t>
+          
+          <t hangText="(4)">
+          ILA-Node#1 obtains loc_2 as Locator of the ILA node#2 from the ID-to-LOC mapping table. ILA-Node#1 
+          converts the prefixes of the source and destination addresses to loc_1 (Locator of id_1) and loc_2 
+          (Locator of id_2). ILA-Node#1 sends the packet to the ILA-Node#2.
+          </t>
+          
+          <t hangText="(5)">
+          ILA-Node#2 receives the packet and converts the prefixes of the source and destination addresses to 
+          SIR_prefix_1, and then sends packets to dUPF#2.
+          </t>
+          
+          <t hangText="(6)">
+          dUPF#2 encapsulate packets with GTP-U header, and sends them to
+      UE#2.
+          </t>      
+          </list>
+          </t>
+        </section>
+        
+        <section title="Case B-2: UEs allocated the same ILA node">
+
+<figure anchor="fig_Process-CaseB-2"
+		title="Procedure in Case B-2">
+  <artwork><![CDATA[
+
+                       +-------+
+                       |Mapping|
+                       |System |
+                       +-------+
+                         .
+                         .
+                         .
+                     (3) .
+                         .
+                         .
+       +-------+       +-------+      +-------+      +-------+
+       | dUPF#1|  (4)  | ILA-  |      | dUPF#2|      | ILA-  |
+       |+------|<----- | Node#1|      |       |      | Node#2|
+       ||  [UL]|       |       |      |   [UL]|      |       |
+       |v  [CL]|------>| loc_1 |      |   [CL]|      | loc_2 |
+       +-------+  (2)  +-------+      +-------+      +-------+
+        |     ^
+    (5) |     | (1)
+        v     |
+
+    [UE#2]    [UE#1]
+SIR_addr_2   SIR_addr_1
+=[1,2]       =[1,1]
+
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix is assigned to UEs. 
+          SIR_addr_1=[1,1] and SIR_addr_2=[1,2] are assigned to UE#1 and UE#2.
+          </t>
+          
+          <t hangText="(1)">
+          UE#1 sends packets to UE#2 with setting SIR_addr_2 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner packet of received GTP-U packet and diverts it to ILA-Node#1 with decapsulation if 
+          the prefix of the destination address is SIR_prefix_1.
+          </t>
+          
+          <t hangText="(3)">
+          ILA-node#1 updates own ID-to-LOC mapping table by interaction with Mapping System (if needed).
+          </t>
+          
+          <t hangText="(4)">
+          ILA-Node#1 obtains loc_1 as Locator of ILA node#2 from the ID-to-LOC mapping table. Since loc_1 indicates 
+          itself, ILA-Node#1 sends the packets back to dUPF#1.
+          </t>
+          
+          <t hangText="(5)">
+          dUPF#1 encapsulate packets with GTP-U, and sends them to UE#2.
+          </t>    
+          </list>
+          </t>
+        </section>
+      </section>
+      
+      <section title="UE-to-dDN Communication">
+      <t>
+      The overview of this communication type is described in A.2.
+      </t>
+        
+        <section title="Case B-3: UE communicates with neighbor dDN">
+      
+<figure anchor="fig_Process-CaseB-3"
+		title="Procedure in Case B-3">
+  <artwork><![CDATA[
+
+                       +-------+
+                       |Mapping|
+                       |System |
+                       +-------+
+                         .
+                         .
+                         .
+                     (3) .
+                         .
+                         .
+       +-------+       +-------+      +-------+      +-------+
+       | dUPF#1|  (6)  | ILA-  |      | dUPF#2|      | ILA-  |
+       |+------|<----- | Node#1|      |       |      | Node#2|
+       ||  [UL]|       |       |      |   [UL]|      |       |
+       |v  [CL]|------>| loc_1 |      |   [CL]|      | loc_2 |
+       +-------+  (2)  +-------+      +-------+      +-------+
+        |    ^           |  ^
+    (7) |    | (1)    (4)|  | (5)
+        v    |           v  |
+                      ,---------.
+        [UE#1]       /  dDN#B    \
+   SIR_addr_1=[1,1]  |  |   ^    |
+                     |  v   |    |
+                     | [APL#1]   |
+                     |SIR_addr_2 |
+                     \ =[2,2]   /
+                      `---------'
+
+
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix (SIR_prefix_1) are assigned to UEs. Applications in dDN#B are belonged to different ILA domain. and different SIR prefix (SIR_prefix_2) is assigned to these applications.
+SIR_addr_1=[1,1] and  SIR_addr_2=[2,2] are assigned to UE#1 and APL#1. APL#1 is located in dDN#B.
+          </t>
+          
+          <t hangText="Uplink Processes">
+          </t>
+          
+          
+          <t hangText="(1)">
+          UE#1 sends packets to APL#1 with setting SIR_addr_2 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner packet of received GTP-U packet and diverts it to ILA-Node#1 with decapsulation 
+          if the prefix of the destination address is SIR_prefix_2.
+          </t>
+          
+          <t hangText="(3)">
+          ILA-Node#1 updates own ID-to-LOC mapping table by interaction with a mapping system (if needed).  Or 
+          ILA-Node#1 may update its own table by a Map-Notify message when an APL is deployed or deleted in dDB#B.
+          </t>
+          
+          <t hangText="(4)">
+          ILA-Node#1 obtains loc_1 as Locator of id_2 from the ID-to-LOC mapping table. Since loc_1 indicates itself, 
+          ILA-Node#1 sends the packets to the dDN#B.
+          </t>
+          
+          <t hangText="Downlink Processes">
+          </t>
+          
+          <t hangText="(5)">
+          APL#1 in dDN#B sends packets to UE#1 with setting SIR_address_1 as the
+      destination IP address.
+          </t>
+          
+          <t hangText="(6)">
+          ILA-Node#1 obtains loc_1 as Locator of id_1 from the ID-to-LOC mapping table.  Since loc=1 indicates itself, ILA-Node#1 sends packets to dUPF#1.
+          </t>
+          
+          <t hangText="(7)">
+          dUPF#2 encapsulates packets with GTP-U, and sends them to UE#1.
+          </t>
+          
+          </list>
+          </t>
+        </section>
+        
+        <section title="Case B-4: UE communicates with non-neighbor dDN">
+      
+<figure anchor="fig_Process-CaseB-4"
+		title="Procedure in Case B-4">
+  <artwork><![CDATA[
+
+                       +-------+
+                       |Mapping|
+                       |System |
+                       +-------+
+                         .
+                         .                (7)
+                         . #================================#
+                     (3) . # #============================# #
+                         . # #            (4)             # #
+                         . V #                            V #
+       +-------+       +-------+        +-------+      +-------+
+       | dUPF#1|  (8)  | ILA-  |        | dUPF#2|      | ILA-  |
+       |+------|<------| Node#1|        |       | (0)  | Node#2|
+       ||  [UL]|       |       |        |   [UL]|<---->|       |
+       |v  [CL]|------>| loc_1 |        |   [CL]|      | loc_2 |
+       +-------+  (2)  +-------+        +-------+      +-------+
+        |    ^                             ^             |  ^
+    (9) |    | (1)                         | (0)      (5)|  | (6)
+        v    |                             |             v  |
+                         (0)               v          ,--------.
+        [UE#1] <= = = = = = = = = = = = =[UE#1]      /  dDN#C   \
+    SIR_addr_1  UE#1 moves to the serving area of    |  |   ^   |
+    =[1,1]     dUPF#1 from the serving area of UPF#2 |  v   |   |
+                                                     | [APL#2]  |
+                                                     |SIR_adrr_3|
+                                                     \ =[3,3]   /
+                                                      `--------'
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix (SIR_prefix_1) are 
+          assigned to UEs. Applications in dDN#C are belonged to different ILA domain. and different SIR prefix 
+          (SIR_prefix_3) is assigned to these applications. SIR_addr_1=[1,1] and  SIR_addr_3=[3,3] are assigned 
+          to UE#1 and APL#2. APL#2 is located in dDN#C. UE#1 has moved to the serving area of dUPF#1 from the 
+          serving area of UPF#2 while communicating to APL#2.
+          </t>
+          
+          <t hangText="Uplink Processes">
+          </t>
+          
+          
+          <t hangText="(1)">
+          UE#1 sends packets to APL#2 with setting SIR_addr_3 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner packet of received GTP-U packet and diverts it to ILA-Node#1 with 
+          decapsulation if the prefix of the destination address is SIR_prefix_3.
+          </t>
+          
+          <t hangText="(3)">
+          ILA-Node#1 updates own ID-to-LOC mapping table by interaction with Mapping System (if needed).
+          </t>
+          
+          <t hangText="(4)">
+          ILA-Node#1 obtains loc_2 as Locator of id_3 from the ID-to-LOC mapping table. ILA-Node#1 converts 
+          the prefix of the source address to loc_1 (Locator of id_1), and the prefix of the destination address 
+          to loc_2 (Locator of id_3). ILA-Node#1 sends the packet to the ILA-Node#2.
+          </t>
+          
+          <t hangText="(5)">
+          ILA-Node#2 converts the prefix of the source address to SIR_prefix_1, and the prefix of the destination 
+          address to SIR_prefix_3, and then sends packets to dDN#C depending on its forwarding table.
+          </t>
+          
+          <t hangText="Downlink Processes">
+          </t>
+          
+          <t hangText="(6)">
+          APL#2 sends packets to UE#1 with setting SIR_address_1 as the
+      destination IP address.
+
+          </t>
+          
+          <t hangText="(7)">
+          ILA-Node#2 obtains loc_1 as Locator of id_1 from the ID-to-LOC mapping table. ILA-Node#2 converts 
+          the prefix of the source address to loc_2 (Locator of id_3), and the prefix of the destination 
+          address to loc_1 (Locator of id_1). ILA-Node#1 sends the packet to the ILA-Node#1.
+          </t>
+          
+          <t hangText="(8)">
+          ILA-Node#1 converts the prefix of the source address to SIR_prefix_3, and the prefix of the destination 
+          address to SIR_prefix_1, and then sends packets to d#UPF1 depending on its forwarding table.
+          </t>
+          
+          <t hangText="(9)">
+          dUPF#1 encapsulates the packets with GTP-U and sends packets to UE#1.
+          </t>
+          </list>
+          </t>
+        </section>
+      </section>
+      
+      <section title="UE-to-cDN/Internet Communication">
+      <t>
+      UE-to-cDN/Internet communication are basically achieved by GTP-U mechanism originally equipped in 3GPP 5GS 
+      architecture. ILA causes some limitation on IP addressing to UEs (e.g., all UEs in an ILA domain have the 
+      same SIR prefix), and thus some IP translation node such as NAT (Network Address Translation) may be required 
+      to enable UEs to access to external network. In this section, we describe processes of UE-to-cDN/Internet 
+      communication in the proposal architecture. In Internet communication, from aspect of privacy or routing with 
+      external network, SIR addresses assigned to UEs are translated by NAT function deployed between dUPF and 
+      connection point.
+      </t>
+      
+        <section title="Case B-5: Internet Communication">
+        
+<figure anchor="fig_Process-CaseB-5"
+		title="Procedure in Case B-5">
+  <artwork><![CDATA[
+
+                          ,------------.
+                         /     cDN      \
+                         |              |
+                         |SIR_addr_4=[4,4]
+                         |    [APL#3]   |
+                         |     |  ^     |
+                         \     |  |     /
+                          `------------'
+                           (4) |  | (3)
+                               v  |
+                          +-----------+
+                          |   cUPF    |
+                          +-----------+
+                               |  ^
+                     (5)       |  |
+          +--------------------+  |
+          |                       |
+          |  +--------------------+
+          |  |       (2)
+          v  |
+       +-------+       +-------+
+       | dUPF#1|       | ILA-  |
+       |       |       | Node#1|
+       |   [UL]|       |       |
+       |   [CL]|       | loc_1 |
+       +-------+       +-------+
+         |  ^     
+     (6) |  | (1) 
+         v  |     
+
+        [UE#1]  
+  SIR_addr_1=[1,1]
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix (SIR_prefix_1) are 
+          assigned to UEs. Applications in cDN are belonged to different ILA domain. and different SIR prefix 
+          (SIR_prefix_4) is assigned to these applications. SIR_addr_1=[1,1] and  SIR_addr_4=[4,4] are assigned 
+          to UE#1 and APL#3. APL#3 is located in cDN.
+          </t>
+          
+          <t hangText="Uplink Processes">
+          </t>
+          
+          
+          <t hangText="(1)">
+          UE#1 sends packets to APL#3 with setting SIR_adrr_4 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner of received GTP-U packets. Since the destination IP address (SIR_adder_4) does 
+          not hit the filter of ULCL, dUPF#1 re-encapsulates the packet to another GTP-U connecting to cUPF and 
+          forwards to cUPF.
+          </t>
+          
+          <t hangText="(3)">
+          cUPF decapusalates GTP-U packets and forwards them to APL#3 in cDN depending on its own forwarding table.
+          </t>
+          
+          <t hangText="Downlink Processes">
+          </t>
+          
+          <t hangText="(4)">
+          APL#3 in cDN sends packets to UE#1 with setting SIR_addr_1 as the destination IP address.
+          </t>
+          
+          <t hangText="(5)">
+          cUPF encapsulates the packets received from APL#3 and forwards them to dUPF#1 with GTP-U encapsulation 
+          depending on its own forwarding table.
+          </t>
+          
+          <t hangText="(6)">
+          dUPF re-encapsulates the packets to another GTP-U and forwards to UE#1.
+          </t>
+          
+          </list>
+          </t>
+        </section>
+        
+        <section title="Case B-6: Internet Communication">
+        
+<figure anchor="fig_Process-CaseB-6"
+		title="Procedure in Case B-6">
+  <artwork><![CDATA[
+
+                           IP_Addr_5
+                           [Server#1]
+                               |  ^
+                           (5) v  | (4)
+                             .--.
+                            (    )-.
+                          .'        '
+                         (  Internet  ) 
+                          (         -'
+                           '-(     )
+                              '---'
+                           (5) |  ^ (4)
+                               v  | 
+                          +-----------+
+                          |    NAT    | SIR_Addr_1 <-> IP_Addr_10
+                          +----+-+----+
+                               |  | 
+                           (6) v  | (3)
+                          +-----------+
+                          |   cUPF    |
+                          +-----------+
+                               |  ^
+                     (7)       |  |
+          +--------------------+  |
+          |                       |
+          |  +--------------------+
+          |  |       (2)
+          v  |
+       +-------+       +-------+
+       | dUPF#1|       | ILA-  |
+       |       |       | Node#1|
+       |   [UL]|       |       |
+       |   [CL]|       | loc_1 |
+       +-------+       +-------+
+         |  ^     
+     (8) |  | (1) 
+         v  |     
+
+        [UE#1]  
+SIR_addr_1=[1,1]
+
+                            
+               Legend: SIR_addr_x=[(SIR_Prefix), (Identifier)]
+
+       
+  ]]></artwork>
+</figure>
+    
+          <t>
+          <list style="hanging">
+          <t hangText="(0)">
+          Within this network, UEs are belonged to the same ILA domain, and the same SIR prefix (SIR_prefix_1) are 
+          assigned to UEs. SIR_addr_1=[1,1] assigned to UE#1 and server#1 has IP_addr_5. UE#1 communicate with 
+          server#1 over Internet.
+          </t>
+          
+          <t hangText="Uplink Processes">
+          </t>
+          
+          
+          <t hangText="(1)">
+          UE#1 sends packets to server#1 with setting IP_adrr_5 as the destination IP address.
+          </t>
+          
+          <t hangText="(2)">
+          dUPF#1 monitors inner of received GTP-U packets. Since the destination IP address (SIR_adder_4) does
+           not hit the filter of ULCL, dUPF#1 re-encapsulates the packet to another GTP-U connecting to cUPF and 
+           forwards to cUPF.
+          </t>
+          
+          <t hangText="(3)">
+          cUPF decapusalates GTP-U packets and forwards them to Internet depending on its own forwarding table.
+          </t>
+          
+          <t hangText="(4)">
+          NAT translates SIR_addr_1 of received packets to IP_addr_10 and the packets are forwarded to server#1 over Internet. 
+          </t>
+          
+          <t hangText="Downlink Processes">
+          </t>
+          
+          <t hangText="(5)">
+          Server#1 sends packets to UE#1 with setting IP_addr_1 as the destination IP address.
+          </t>
+          
+          <t hangText="(6)">
+          NAT translates IP_addr_10 of received packets to SIR_addr_1, and packets are sent to cUPF.
+          </t>
+          
+          <t hangText="(7)">
+          cUPF encapsulates the packets with GTP-U and sends them to dUPF#1 depending on its own forwarding table.
+          </t>
+          
+          <t hangText="(8)">
+          dUPF re-encapsulates the packets to another GTP-U and forwards to UE#1.
+          </t>
+          
+          </list>
+          </t>
+        </section>
+      </section>
+    </section>
+        
+  </back>
+
+</rfc>
