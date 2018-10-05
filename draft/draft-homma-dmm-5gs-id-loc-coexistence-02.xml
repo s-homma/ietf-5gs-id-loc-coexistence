@@ -245,7 +245,7 @@
 
           <t hangText="Endpoint Identifier (EID):">
           An EID is an identifier of end point such as UE or VM instance. An EID is a 32-bit (for IPv4) or 128-bit (for IPv6) value used in the source
-          and destination IP address fields of an IP packet sent from an UE or a VM instance.
+          and destination IP address fields of an IP packet sent from a UE or a VM instance.
           </t>
 
           <t hangText="Routing Locator (RLOC):">
@@ -402,7 +402,7 @@
       </t>
 
       <t>
-      Distributed UPFs (dUPFs) and Distributed DNs (dDNs) are deployed and geographically distributed at user edge side. A unique address space (it's not necessarily globally unique) is assigned to dDN. When a dUPF forwards an UE's uplink packet, and if the subnet of the destination address is the same as the one assigned to dDN at proximity, then dUPF, with the help of ULCL, may divert the packet to that dDN. Here, the ULCL identifies each encapsulated uplink packet to be diverted, by checking if the destination of the inner packet is one of IP addresses assigned the dDN. A dUPF removes GTP-U header from the packets, and sends them to dDN via N6. When dUPF receives packets from dDN, dUPF encapsulates them with GTP-U header, and merges them into downlink packets from cUPF. An overview of behaviors of dUPF and ULCL is shown in <xref target="fig_dUPF-ULCL-Behaivor"/>.
+      Distributed UPFs (dUPFs) and Distributed DNs (dDNs) are deployed and geographically distributed at user edge side. A unique address space (it's not necessarily globally unique) is assigned to dDN. When a dUPF forwards a UE's uplink packet, and if the subnet of the destination address is the same as the one assigned to dDN at proximity, then dUPF, with the help of ULCL, may divert the packet to that dDN. Here, the ULCL identifies each encapsulated uplink packet to be diverted, by checking if the destination of the inner packet is one of IP addresses assigned the dDN. A dUPF removes GTP-U header from the packets, and sends them to dDN via N6. When dUPF receives packets from dDN, dUPF encapsulates them with GTP-U header, and merges them into downlink packets from cUPF. An overview of behaviors of dUPF and ULCL is shown in <xref target="fig_dUPF-ULCL-Behaivor"/>.
 <!--
       Each dUPF has an ULCL, and unique address space (it's not necessarily uniquie globally) is assigned to each dDN.  As an
       example of usage ULCL, ULCL identifies each uplink packet encapsulated by GTP-U, and divert the packet to
@@ -491,7 +491,7 @@
      `----+------------#--.-----------+------------#--.-'
           |N9          #  .           |N9          #  .
     +-----+-----+   +-------+   +-----+-----+   +-------+
-    |   dUPF#1  |N6 | LOC-  |   |   dUPF#2  |N6 | LOC-  |
+    |   dUPF#1  |N6 | ID-LOC|   |   dUPF#2  |N6 | ID-LOC|
     |       [UL]+---+ Node#1|   |       [UL]+---| Node#2|..
     |       [CL]|   |       |   |       [CL]|   |       |
     +-----+-----+   +---+---+   +-----+-----+   +---+---+
@@ -632,7 +632,7 @@
 C-plane                N1/ |N2         |N4
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-D-plane               /    |           |
+U-plane               /    |           |
                   N1 /     |N2         |N4
                     /      |           |
                  +-+-+  +--+--+ N3  +--+--+ N6  +----+
@@ -646,17 +646,17 @@ D-plane               /    |           |
 
       <section title="Model 1: Independent Control Planes">
       <t>
-      In this model, control plane of 5GC and ID-to-LOC mapping mechanism are completely separated. Information of an UE and an ID-LOC node which the UE is attached is sent to a mapping system and registered in the mapping database only when the ID-LOC node receives a packet from the UE and the UE is not registered yet.
+      In this model, control plane of 5GC and ID-to-LOC mapping mechanism are completely separated. Information of a UE and an ID-LOC node which the UE is attached is sent to a mapping system and registered in the mapping database only when the ID-LOC node receives a packet from the UE and the UE is not registered yet.
       </t>
 
       <t>
-      This model does not cause any impacts on 5GC architecture. However, in this model, an UE cannot be accessed from other UEs within the same network domain until a packet from the UE is diverted to the ID-LOC node by the UPF which the UE is located and the ID and LOC are registered to the Mapping System.
+      This model does not cause any impacts on 5GC architecture. However, in this model, a UE cannot be accessed from other UEs within the same network domain until a packet from the UE is diverted to the ID-LOC node by the UPF which the UE is located and the ID and LOC are registered to the Mapping System.
       </t>
       </section>
 
       <section title="Model 2: Interworking Control Planes">
       <t>
-      In this model, a mapping system interworks with an SMF which manages sessions of each UE. A scheme to inform, that an UE moves and is relocated to another UPF, from SMF to AF via Naf interface is defined in 5GS (<xref target="TS.23.502-3GPP"/>)*. A Mapping System is installed as an AF and obtains mobility information of UEs with the above scheme.
+      In this model, a mapping system interworks with an SMF which manages sessions of each UE. A scheme to inform, that a UE moves and is relocated to another UPF, from SMF to AF via Naf interface is defined in 5GS (<xref target="TS.23.502-3GPP"/>)*. A Mapping System is installed as an AF and obtains mobility information of UEs with the above scheme.
       </t>
 
       <t>
@@ -670,7 +670,7 @@ D-plane               /    |           |
 
       <section title="Model 3: Integrated Control Planes">
       <t>
-      In this model, SMF functionalities are integrated into a mapping system. In other words, the mapping system becomes a part of 5GS. In 5GS architecture, an SMF has a role of session management of UEs, and it updates its own mapping database depending on movement of an UE.
+      In this model, SMF functionalities are integrated into a mapping system. In other words, the mapping system becomes a part of 5GS. In 5GS architecture, an SMF has a role of session management of UEs, and it updates its own mapping database depending on movement of a UE.
       </t>
 
       <t>
@@ -844,7 +844,7 @@ D-plane               /    |           |
       </t>
 
       <t>
-      Moreover, in a mobile network, an UE may move during communications. This section describes considerations about UE's handover in such case.
+      Moreover, in a mobile network, a UE may move during communications. This section describes considerations about UE's handover in such case.
       </t>
 
         <section title="Case A-1: UEs allocated different dUPF">
@@ -962,7 +962,7 @@ D-plane               /    |           |
         Since xTR#1 serves UE#2, it locally routes the traffic for EID=a-2. xTR#1 sends the received packets back to dUPF#1.
         </t>
 
-        <t hangText="(5)">
+        <t hangText="(4)">
         dUPF#1 encapsulate packets with GTP-U, and sends them to UE#2.
         </t>
         </list>
@@ -971,7 +971,7 @@ D-plane               /    |           |
 
         <section title="Consideration of Case that UE Moves to under Another xTR">
         <t>
-        When an UE moves to a serving area of another dUPF during communication with another UE, EID-to-RLOC mapping database of a Mapping System and the tables of the xTR and the peered xTR must be updated. Unless some of the mechanism described below are in place, the xTRs can't send packets to the appropriate xTR during the updating, and thus packet drop or stalling may occur.
+        When a UE moves to a serving area of another dUPF during communication with another UE, EID-to-RLOC mapping database of a Mapping System and the tables of the xTR and the peered xTR must be updated. Unless some of the mechanism described below are in place, the xTRs can't send packets to the appropriate xTR during the updating, and thus packet drop or stalling may occur.
         </t>
 
         <t>
@@ -982,7 +982,7 @@ D-plane               /    |           |
 
       <section title="UE-to-dDN Communication">
       <t>
-      The UE-to-dDN communications basically correspond the communication between an UE and neighbor dDN (Case3). On the other hand, if an UE moved under another dUPF during usage of a stateful application, or the application is not uniformly deployed in every dDN, the UE needs to continue to communicate with the previous dDN (Case4).
+      The UE-to-dDN communications basically correspond the communication between a UE and neighbor dDN (Case3). On the other hand, if a UE moved under another dUPF during usage of a stateful application, or the application is not uniformly deployed in every dDN, the UE needs to continue to communicate with the previous dDN (Case4).
       </t>
 
       <t>
@@ -990,7 +990,7 @@ D-plane               /    |           |
       </t>
 
       <t>
-      In this section, the detailed procedures of communications between an UE and neighbor dDN and communications between an UE and non-neighbor dDN
+      In this section, the detailed procedures of communications between a UE and neighbor dDN and communications between a UE and non-neighbor dDN
       </t>
 
         <section title="Case A-3: UE communicates with neighbor dDN">
