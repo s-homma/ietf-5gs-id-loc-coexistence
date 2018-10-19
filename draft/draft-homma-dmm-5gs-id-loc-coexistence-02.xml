@@ -81,7 +81,7 @@
     </title>
 
     <author fullname="Shunsuke Homma" initials="S." surname="Homma">
-      <organization abbrev="NTT">NTT, Corp.</organization>
+      <organization abbrev="NTT">NTT</organization>
 
       <address>
         <postal>
@@ -100,7 +100,7 @@
     </author>
 
     <author fullname="Kenta Kawakami" initials="K." surname="Kawakami">
-      <organization abbrev="NTT">NTT, Corp.</organization>
+      <organization abbrev="NTT">NTT</organization>
 
       <address>
         <postal>
@@ -160,7 +160,7 @@
     </author>
 
 
-    <date day="31" month="August" year="2018"/>
+    <date day="19" month="October" year="2018"/>
 
     <area>Internet Area</area>
 
@@ -170,7 +170,7 @@
 
     <abstract>
       <t>
-      This document describes an approach to introduce Identifier Locator Separation architecture into 3GPP 5GS with low-impact on its specification, and shows the features and considerations of this approach.
+      This document describes an approach to introduce Identifier Locator Separation architecture into 3GPP 5GS with low-impact on its specifications, and shows the features and considerations of this approach.
       </t>
 
 
@@ -637,9 +637,10 @@ U-plane               /    |           |
                     /      |           |
                  +-+-+  +--+--+ N3  +--+--+ N6  +----+
                  |UE +--+(R)AN+-----+ UPF +-----+ DN |
-                 +---+  +-----+     +-----+     +----+
-
-
+                 +---+  +-----+     ++---++     +----+
+                                     |   |
+                                     +---+
+                                      N9
  ]]></artwork>
 </figure>
 
@@ -1187,7 +1188,6 @@ U-plane               /    |           |
                                |  ^
                      (5)       |  |
           +--------------------+  |
-          |                       |
           |  +--------------------+
           |  |       (2)
           V  |
@@ -1645,7 +1645,6 @@ SIR_addr_2   SIR_addr_1
                                |  ^
                      (5)       |  |
           +--------------------+  |
-          |                       |
           |  +--------------------+
           |  |       (2)
           v  |
@@ -1740,7 +1739,6 @@ SIR_addr_2   SIR_addr_1
                                |  ^
                      (7)       |  |
           +--------------------+  |
-          |                       |
           |  +--------------------+
           |  |       (2)
           v  |
