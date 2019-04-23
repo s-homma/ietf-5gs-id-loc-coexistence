@@ -69,7 +69,7 @@
 <!-- end of list of popular I-D processing instructions -->
 
 
-<rfc category="std" docName="draft-homma-dmm-5gs-id-loc-coexistence-02">
+<rfc category="std" docName="draft-homma-dmm-5gs-id-loc-coexistence-03">
   <!-- ***** FRONT MATTER ***** -->
 
 
@@ -95,7 +95,7 @@
 
           <country>Japan</country>
         </postal>
-        <email>homma.shunsuke@lab.ntt.co.jp</email>
+        <email>shunsuke.homma.fp@hco.ntt.co.jp</email>
       </address>
     </author>
 
@@ -160,7 +160,7 @@
     </author>
 
 
-    <date day="19" month="October" year="2018"/>
+    <date/>
 
     <area>Internet Area</area>
 
